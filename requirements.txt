@@ -169,7 +169,7 @@ tensorboard==2.18.0
 tensorboard-data-server==0.7.2
 tensorflow==2.18.0
 tensorflow-hub==0.16.1
-tensorflow_intel==2.18.0
+
 termcolor==2.5.0
 tf_keras==2.18.0
 tiktoken==0.8.0
