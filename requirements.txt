@@ -42,7 +42,7 @@ gitdb==4.0.12
 GitPython==3.1.44
 google-auth==2.38.0
 google-pasta==0.2.0
-googleapis-common-protos==1.66.0
+
 greenlet==3.1.1
 grpcio==1.68.1
 h11==0.14.0
@@ -82,7 +82,7 @@ MarkupSafe==3.0.2
 marshmallow==3.26.1
 matplotlib==3.10.0
 mdurl==0.1.2
-mediapipe==0.10.20
+
 ml-dtypes==0.4.1
 mmh3==5.1.0
 monotonic==1.6
@@ -95,7 +95,7 @@ networkx==3.4.2
 numpy==1.26.4
 oauthlib==3.2.2
 ollama==0.4.7
-onnxruntime==1.20.1
+
 openai==1.61.1
 opencv-contrib-python==4.10.0.84
 opencv-python==4.10.0.84
@@ -105,7 +105,7 @@ opentelemetry-exporter-otlp-proto-grpc==1.30.0
 opentelemetry-instrumentation==0.51b0
 opentelemetry-instrumentation-asgi==0.51b0
 opentelemetry-instrumentation-fastapi==0.51b0
-opentelemetry-proto==1.30.0
+
 opentelemetry-sdk==1.30.0
 opentelemetry-semantic-conventions==0.51b0
 opentelemetry-util-http==0.51b0
