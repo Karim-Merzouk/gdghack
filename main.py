@@ -275,9 +275,12 @@ def add_hackathon(data: HackathonOpportunity):
     except Exception as e:
         return {"error": str(e)}
 
+class HUSkills(BaseModel):
+    username: str
+    skills: list
 
 @app.post("/find-hackathons")
-def find_hackathons(data: UserSkills):
+def find_hackathons(data: HUSkills):
     """Find hackathons a user qualifies for based on skills."""
     try:
         skills_text = " ".join(data.skills)
