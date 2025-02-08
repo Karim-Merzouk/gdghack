@@ -42,8 +42,9 @@ gitdb==4.0.12
 GitPython==3.1.44
 google-auth==2.38.0
 google-pasta==0.2.0
-
+googleapis-common-protos==1.66.0
 greenlet==3.1.1
+groq==0.18.0
 grpcio==1.68.1
 h11==0.14.0
 h5py==3.12.1
@@ -82,7 +83,7 @@ MarkupSafe==3.0.2
 marshmallow==3.26.1
 matplotlib==3.10.0
 mdurl==0.1.2
-
+mediapipe==0.10.20
 ml-dtypes==0.4.1
 mmh3==5.1.0
 monotonic==1.6
@@ -95,7 +96,7 @@ networkx==3.4.2
 numpy==1.26.4
 oauthlib==3.2.2
 ollama==0.4.7
-
+onnxruntime==1.20.1
 openai==1.61.1
 opencv-contrib-python==4.10.0.84
 opencv-python==4.10.0.84
@@ -105,7 +106,7 @@ opentelemetry-exporter-otlp-proto-grpc==1.30.0
 opentelemetry-instrumentation==0.51b0
 opentelemetry-instrumentation-asgi==0.51b0
 opentelemetry-instrumentation-fastapi==0.51b0
-
+opentelemetry-proto==1.30.0
 opentelemetry-sdk==1.30.0
 opentelemetry-semantic-conventions==0.51b0
 opentelemetry-util-http==0.51b0
@@ -116,17 +117,16 @@ overrides==7.7.0
 packaging==24.2
 pandas==2.2.3
 pillow==11.0.0
-pip==24.3.1
 posthog==3.11.0
 propcache==0.2.1
-
+protobuf==5.29.3
 pyarrow==19.0.0
 pyasn1==0.6.1
 pyasn1_modules==0.4.1
 pycparser==2.22
 pydantic==2.10.6
-pydantic_core==2.27.2
 pydantic-settings==2.7.1
+pydantic_core==2.27.2
 pydeck==0.9.1
 Pygments==2.18.0
 pymongo==4.11
@@ -169,7 +169,7 @@ tensorboard==2.18.0
 tensorboard-data-server==0.7.2
 tensorflow==2.18.0
 tensorflow-hub==0.16.1
-
+tensorflow_intel==2.18.0
 termcolor==2.5.0
 tf_keras==2.18.0
 tiktoken==0.8.0
@@ -183,8 +183,8 @@ tornado==6.4.2
 tqdm==4.67.1
 transformers==4.48.2
 typer==0.15.1
-typing_extensions==4.12.2
 typing-inspect==0.9.0
+typing_extensions==4.12.2
 tzdata==2024.2
 urllib3==2.3.0
 uvicorn==0.34.0
