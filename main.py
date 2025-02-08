@@ -44,22 +44,21 @@ def generate_roadmap(skills, career_path):
     prompt = f"""
     Given my skills {skills} and career goal {career_path}, create a **detailed, step-by-step roadmap**.
     Ignore unrelated skills (e.g., if the goal is "Web Developer," exclude "Machine Learning").
-
+    
     **Rules**:
     - Output **ONLY JSON**, no explanations, no markdown.
     - JSON format:
       {{
-        "Phase 1: Fundamentals": ["Key topic 1", "Key topic 2", "Certification", "Relevant Tools", "Book", "Project"],
-        "Phase 2: Intermediate": ["Key topic 3", "Key topic 4", "Certification", "Relevant Tools", "Book", "Project"],
-        "Phase 3: Advanced": ["Key topic 5", "Key topic 6", "Certification", "Relevant Tools", "Book", "Project"],
-        "Phase 4: Expert & Industry Readiness": ["Key topic 7", "Key topic 8", "Certification", "Relevant Tools", "Book", "Capstone Project"]
+        "Node1": ["ConnectedNode1", "ConnectedNode2"],
+        "Node2": ["ConnectedNode3"],
+        ...
       }}
-    - Each phase should include:
+    - Nodes should include:
       - Key topics to learn
       - Certifications or projects
       - Industry tools
       - Learning resources (books, courses, etc.)
-      - A project at the end of every phase to apply skills and get hands-on experience
+      - A project at the end of every node to apply skills
     """
     try:
         messages = [{"role": "user", "content": prompt}]
