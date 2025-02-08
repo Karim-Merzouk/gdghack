@@ -161,7 +161,7 @@ else:
     collection = chroma_client.get_collection(name="users_skills")
 
 class UserSkills(BaseModel):
-    profile_image: str  # Unique identifier for the user
+    profileImg: str  # Unique identifier for the user
     username: str  # User's display name
     skills: list   # List of skills
 
