@@ -188,7 +188,7 @@ def get_embedding(text):
 
 @app.post("/store-skills")
 def store_skills(data: UserSkills):
-    """Store user skills in ChromaDB."""
+    """Store user skills in ChromaDB, including profile image."""
     try:
         skills_text = " ".join(data.skills)
         embedding = get_embedding(skills_text)
@@ -197,22 +197,25 @@ def store_skills(data: UserSkills):
 
         existing_users = collection.get(where={"username": data.username})
         if existing_users["ids"]:
-            user_id = existing_users["ids"][0]
+            user_id = existing_users["ids"][0]  # Use existing user ID
         else:
-            user_id = str(uuid.uuid4())
+            user_id = str(uuid.uuid4())  # Generate new UUID
 
+        # 🔹 Store user data with profile image
         collection.add(
             ids=[user_id],
             embeddings=[embedding],
             metadatas=[{
                 "username": data.username,
-                "skills": ", ".join(data.skills)
+                "skills": ", ".join(data.skills),
+                "profileImg": data.profileImg  # Store profile image
             }]
         )
+
         return {
             "message": "Skills stored successfully",
             "username": data.username,
-            "dimension": len(embedding),
+            "profileImg": data.profileImg,  # Confirm profile image is stored
             "collection_count": collection.count()
         }
     except Exception as e:
@@ -220,31 +223,34 @@ def store_skills(data: UserSkills):
 
 @app.post("/find-similar")
 def find_similar(data: UserSkills):
-    """Find up to 5 similar users based on skills."""
+    """Find up to 5 similar users based on skills and include profile image."""
     try:
         skills_text = " ".join(data.skills)
         query_embedding = get_embedding(skills_text)
         if isinstance(query_embedding, dict) and "error" in query_embedding:
             return query_embedding
 
-        results = collection.query(
-            query_embeddings=[query_embedding],
-            n_results=5
-        )
+        results = collection.query(query_embeddings=[query_embedding], n_results=5)
+
         similar_users = []
-        if results["ids"][0]:
+        if results["ids"][0]:  # Ensure users exist
             for i, user_id in enumerate(results["ids"][0]):
                 user_metadata = collection.get(ids=[user_id])["metadatas"][0]
                 username = user_metadata.get("username", "Unknown User")
-                profileImg = user_metadata.get("profileImg", "https://example.com/profile.png")
                 skills = user_metadata.get("skills", "No skills found")
+                
+                # 🔹 Retrieve profile image, set default if missing
+                profileImg = user_metadata.get("profileImg", "https://example.com/default-profile.png")
+
                 similar_users.append({
                     "profileImg": profileImg,
                     "username": username,
                     "skills": skills,
                     "score": results["distances"][0][i]
                 })
-        return similar_users
+        
+        return similar_users  # ✅ Return list of similar users
+
     except Exception as e:
         return {"error": str(e)}
 
