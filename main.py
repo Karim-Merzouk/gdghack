@@ -165,6 +165,11 @@ class UserSkills(BaseModel):
     username: str  # User's display name
     skills: list   # List of skills
 
+class UserSkillsH(BaseModel):
+  
+    username: str  # User's display name
+    skills: list   # List of skills
+
 MAX_EMBEDDING_DIM = 200  # Fixed size for embeddings
 
 def get_embedding(text):
@@ -277,7 +282,7 @@ def add_hackathon(data: HackathonOpportunity):
 
 
 @app.post("/find-hackathons")
-def find_hackathons(data: UserSkills):
+def find_hackathons(data: UserSkillsH):
     """Find hackathons a user qualifies for based on skills."""
     try:
         skills_text = " ".join(data.skills)
