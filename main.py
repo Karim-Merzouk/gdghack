@@ -161,6 +161,7 @@ else:
     collection = chroma_client.get_collection(name="users_skills")
 
 class UserSkills(BaseModel):
+    profile_image: str  # Unique identifier for the user
     username: str  # User's display name
     skills: list   # List of skills
 
@@ -274,6 +275,7 @@ def add_hackathon(data: HackathonOpportunity):
     except Exception as e:
         return {"error": str(e)}
 
+
 @app.post("/find-hackathons")
 def find_hackathons(data: UserSkills):
     """Find hackathons a user qualifies for based on skills."""
@@ -285,22 +287,27 @@ def find_hackathons(data: UserSkills):
 
         results = hackathons_collection.query(query_embeddings=[query_embedding], n_results=5)
         matched_hackathons = []
+
         if results["ids"][0]:
             for i, hackathon_id in enumerate(results["ids"][0]):
-                hackathon_metadata = hackathons_collection.get(ids=[hackathon_id])["metadatas"][0]
-                name = hackathon_metadata.get("name", "Unknown Hackathon")
-                required_skills = hackathon_metadata.get("required_skills", "No skills found")
-                matched_hackathons.append({
-                    "hackathon_id": hackathon_id,
-                    "name": name,
-                    "required_skills": required_skills,
-                    "score": results["distances"][0][i]
-                })
-        # Optionally, if you want to save to a JSON file, you could do so here.
-        # For now, we simply return the matched hackathons as a dictionary.
-        return {"message": "Hackathons found", "matched_hackathons": matched_hackathons}
+                score = results["distances"][0][i]  # Score from query
+
+                if score > 70:  # ✅ Only include hackathons with score > 70
+                    hackathon_metadata = hackathons_collection.get(ids=[hackathon_id])["metadatas"][0]
+                    name = hackathon_metadata.get("name", "Unknown Hackathon")
+                    required_skills = hackathon_metadata.get("required_skills", "No skills found")
+
+                    matched_hackathons.append({
+                        "hackathon_id": hackathon_id,
+                        "name": name,
+                        "required_skills": required_skills,
+                        "score": score
+                    })
+
+        return matched_hackathons
     except Exception as e:
         return {"error": str(e)}
+
 
 # ================================
 # 5. ONLINE QUIZ GENERATION
