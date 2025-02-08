@@ -303,7 +303,7 @@ def find_hackathons(data: HUSkills):
             for i, hackathon_id in enumerate(results["ids"][0]):
                 score = results["distances"][0][i]  # Score from query
 
-                if score > 70:  # ✅ Only include hackathons with score > 70
+                if score > 20:  # ✅ Only include hackathons with score > 70
                     hackathon_metadata = hackathons_collection.get(ids=[hackathon_id])["metadatas"][0]
                     name = hackathon_metadata.get("name", "Unknown Hackathon")
                     required_skills = hackathon_metadata.get("required_skills", "No skills found")
