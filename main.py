@@ -161,12 +161,7 @@ else:
     collection = chroma_client.get_collection(name="users_skills")
 
 class UserSkills(BaseModel):
-    profileImg: str  # Unique identifier for the user
-    username: str  # User's display name
-    skills: list   # List of skills
-
-class UserSkillsH(BaseModel):
-  
+    profile_image: str  # Unique identifier for the user
     username: str  # User's display name
     skills: list   # List of skills
 
@@ -282,7 +277,7 @@ def add_hackathon(data: HackathonOpportunity):
 
 
 @app.post("/find-hackathons")
-def find_hackathons(data: UserSkillsH):
+def find_hackathons(data: UserSkills):
     """Find hackathons a user qualifies for based on skills."""
     try:
         skills_text = " ".join(data.skills)
@@ -309,7 +304,7 @@ def find_hackathons(data: UserSkillsH):
                         "score": score
                     })
 
-        return matched_hackathons
+        return { "matched_hackathons": matched_hackathons}
     except Exception as e:
         return {"error": str(e)}
 
