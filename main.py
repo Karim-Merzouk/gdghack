@@ -236,8 +236,10 @@ def find_similar(data: UserSkills):
             for i, user_id in enumerate(results["ids"][0]):
                 user_metadata = collection.get(ids=[user_id])["metadatas"][0]
                 username = user_metadata.get("username", "Unknown User")
+                profileImg = user_metadata.get("profileImg", "https://example.com/profile.png")
                 skills = user_metadata.get("skills", "No skills found")
                 similar_users.append({
+                    "profileImg": profileImg,
                     "username": username,
                     "skills": skills,
                     "score": results["distances"][0][i]
